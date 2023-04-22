@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WalletAppBackend.Models.Database;
@@ -11,9 +12,11 @@ using WalletAppBackend.Models.Database;
 namespace WalletAppBackend.Migrations
 {
     [DbContext(typeof(AppDatabaseContext))]
-    partial class AppDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230422100939_TypoFixAndUserNameSplit")]
+    partial class TypoFixAndUserNameSplit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,6 +104,9 @@ namespace WalletAppBackend.Migrations
 
                     b.Property<int?>("StatusId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("StatusTitle")
+                        .HasColumnType("text");
 
                     b.Property<string>("TypeTitle")
                         .HasColumnType("text");
