@@ -24,7 +24,9 @@ namespace WalletAppBackend.Configurations.Services
             CreateMap<User, UserApi>().ReverseMap();
             CreateMap<User, CreateUserApi>().ReverseMap();
 
-            CreateMap<User, TransactionsDashboardApi>();
+            CreateMap<User, TransactionsDashboardApi>()
+                .ForMember(dest => dest.AvailableCredits,
+                           source => source.MapFrom(entity => entity.CardLimit - entity.Balance));
         }
     }
 }
