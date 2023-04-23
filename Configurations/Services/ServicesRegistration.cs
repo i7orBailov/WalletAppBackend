@@ -14,6 +14,7 @@ namespace WalletAppBackend.Configurations.Services
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<ISeasonService, SeasonService>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
             return services;
@@ -38,8 +39,15 @@ namespace WalletAppBackend.Configurations.Services
                 options.UseLazyLoadingProxies();
             });
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-            
+
             services.AddScoped<IDatabaseSeeder, DatabaseDataSeeder>();
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterSchedulers(this IServiceCollection services)
+        {
+            services.AddHostedService<DailyPointsScheduler>();
 
             return services;
         }

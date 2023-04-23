@@ -17,6 +17,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.RegisterBusinessDatabase(builder.Configuration);
 builder.Services.RegisterDependencyInjection();
 builder.Services.RegisterAutoMapper();
+builder.Services.RegisterSchedulers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

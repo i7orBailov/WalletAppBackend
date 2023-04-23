@@ -12,11 +12,19 @@ namespace WalletAppBackend.Services.Business
     {
         private readonly IBaseRepository<User> _userRepository;
         private readonly IMapper _mapper;
+        private readonly ISeasonService _seasonService;
+        private readonly IConfiguration _configuration;
 
-        public UserService(IBaseRepository<User> userRepository, IMapper mapper)
+        public UserService(
+            IBaseRepository<User> userRepository, 
+            IMapper mapper, 
+            ISeasonService seasonService,
+            IConfiguration configuration)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _seasonService = seasonService;
+            _configuration = configuration;
         }
 
         public async Task<ResponseMessage<IEnumerable<UserApi>>> GetAll()
@@ -41,6 +49,47 @@ namespace WalletAppBackend.Services.Business
             userDbModel.PasswordSalt = salt;
             var savedUserDbModel = await _userRepository.AddAsync(userDbModel);
             return new ResponseMessage<int>(isSuccessful: true, savedUserDbModel.Id);
+        }
+
+        public async Task UpdateDailyPointsForEachUser()
+        {
+            var users = await _userRepository.GetAllAsync();
+            foreach (var user in users)
+            {
+                int updatedDailyPoints = CalculateDailyPoints();
+                user.DailyPoints = updatedDailyPoints;
+                await _userRepository.UpdateAsync(user);
+            }
+        }
+
+        private int CalculateDailyPoints()
+        {
+            int firstValue = _configuration.GetValue<int>("DailyPoints:FirstDayNewSeason");
+            int secondValue = _configuration.GetValue<int>("DailyPoints:SecondDayNewSeason");
+            int dayNumber = _seasonService.GetDayNumberInSeason();
+
+            if (dayNumber == 1)
+            {
+                return firstValue;
+            }
+            else if (dayNumber == 2)
+            {
+                return secondValue;
+            }
+            else
+            {
+                int prev = firstValue;
+                int curr = secondValue;
+                int sum = firstValue + secondValue;
+                for (int i = 3; i <= dayNumber; i++)
+                {
+                    int next = (int)(0.6 * curr + prev);
+                    sum += next;
+                    prev = curr;
+                    curr = next;
+                }
+                return sum;
+            }
         }
     }
 }

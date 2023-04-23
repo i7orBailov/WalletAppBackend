@@ -7,5 +7,6 @@ namespace WalletAppBackend.Services.Interfaces
     {
         Task<ResponseMessage<IEnumerable<UserApi>>> GetAll();
         Task<ResponseMessage<int>> CreateNewUser(CreateUserApi userApiModel);
+        Task UpdateDailyPointsForEachUser();
     }
 }

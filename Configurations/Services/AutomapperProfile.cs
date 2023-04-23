@@ -22,6 +22,8 @@ namespace WalletAppBackend.Configurations.Services
 
             CreateMap<User, UserApi>().ReverseMap();
             CreateMap<User, CreateUserApi>().ReverseMap();
+
+            CreateMap<User, TransactionsDashboardApi>();
         }
     }
 }

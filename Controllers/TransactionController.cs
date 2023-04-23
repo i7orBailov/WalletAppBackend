@@ -48,5 +48,19 @@ namespace WalletAppBackend.Controllers
             var serverResponse = await _transactionService.DeleteTransaction(transactionId);
             return Ok(serverResponse);
         }
+
+        [HttpGet("transactionsList")]
+        public async Task<IActionResult> TransactionsList([FromQuery] int ownerId)
+        {
+            var transactionsData = await _transactionService.GetTransactionsListScreen(ownerId);
+            return Ok(transactionsData);
+        }
+
+        [HttpGet("transactionDetails")]
+        public async Task<IActionResult> TransactionDetails([FromQuery] int transactionId)
+        {
+            var transactionDetails = await _transactionService.GetTransactionDetails(transactionId);
+            return Ok(transactionDetails);
+        }
     }
 }

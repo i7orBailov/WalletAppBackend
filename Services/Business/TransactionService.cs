@@ -10,21 +10,21 @@ namespace WalletAppBackend.Services.Business
 {
     public class TransactionService : ITransactionService
     {
-        // initial task is to retrieve first 10 transactions, but it can be extended later to manually select amount of records.
-        private const int TRANSACTIONS_AMOUNT_CRITETIA = 10;
-
         private readonly IBaseRepository<Transaction> _transactionRepository;
         private readonly IBaseRepository<User> _userRepository;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
         public TransactionService(
             IBaseRepository<Transaction> transactionRepository, 
             IBaseRepository<User> userRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IConfiguration configuration)
         {
             _transactionRepository = transactionRepository;
             _userRepository = userRepository;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
         public async Task<ResponseMessage<IEnumerable<TransactionApi>>> GetAll(int ownerId)
@@ -39,10 +39,7 @@ namespace WalletAppBackend.Services.Business
             {
                 throw new BusinessException("User has no transactions associated");
             }
-            var filteredTransactions = transactions.OrderByDescending(t => t.Date)
-                .Take(TRANSACTIONS_AMOUNT_CRITETIA)
-                .ToList();
-            var transactionsApiModel = _mapper.Map<IEnumerable<Transaction>, IEnumerable<TransactionApi>>(filteredTransactions);
+            var transactionsApiModel = _mapper.Map<IEnumerable<Transaction>, IEnumerable<TransactionApi>>(transactions);
             return new ResponseMessage<IEnumerable<TransactionApi>>(isSuccessful: true, transactionsApiModel);
         }
 
@@ -67,6 +64,32 @@ namespace WalletAppBackend.Services.Business
 
             await _transactionRepository.DeleteAsync(transaction);
             return new ResponseMessage<int>(isSuccessful: true, transaction.Id);
+        }
+
+        public async Task<ResponseMessage<TransactionsListDashboardApi>> GetTransactionsListScreen(int ownerId)
+        {
+            var transactionsResult = await GetAll(ownerId);
+            var latestTransactions = transactionsResult.Data.OrderByDescending(t => t.Date)
+                .Take(_configuration.GetValue<int>("Transactions:AmontCriteria"))
+                .ToList();
+
+            var user = await _userRepository.GetFirstOrDefaultAsync(u => u.Id == ownerId) ??
+                throw new BusinessException("Owner user does not exist");
+            var dashboard = _mapper.Map<User, TransactionsDashboardApi>(user);
+            var responseModel = new TransactionsListDashboardApi
+            {
+                Dashboard = dashboard,
+                LatestTransactions = latestTransactions
+            };
+            return new ResponseMessage<TransactionsListDashboardApi>(isSuccessful: true, responseModel);
+        }
+
+        public async Task<ResponseMessage<TransactionApi>> GetTransactionDetails(int transactionId)
+        {
+            var transaction = await _transactionRepository.GetFirstOrDefaultAsync(t => t.Id == transactionId)
+                ?? throw new BusinessException("No transaction exists.");
+            var transactionApiModel = _mapper.Map<Transaction, TransactionApi>(transaction);
+            return new ResponseMessage<TransactionApi>(isSuccessful: true, transactionApiModel);
         }
     }
 }
