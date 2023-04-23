@@ -1,9 +1,7 @@
 using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using WalletAppBackend.Models.Database;
 using WalletAppBackend.Configurations.Services;
-using AutoMapper;
+using WalletAppBackend.Configurations.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,12 +14,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });
-builder.Services.AddDbContext<AppDatabaseContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"));
-    options.UseLazyLoadingProxies();
-});
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+builder.Services.RegisterBusinessDatabase(builder.Configuration);
 builder.Services.RegisterDependencyInjection();
 builder.Services.RegisterAutoMapper();
 
@@ -37,6 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseDatabaseDataSeeder();
 
 app.UseHttpsRedirection();
 

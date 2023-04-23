@@ -33,7 +33,8 @@ namespace WalletAppBackend.Models.Database
                     .IsRequired();
 
                 entity.Property(u => u.PasswordSalt)
-                    .IsRequired();
+                    .IsRequired()
+                    .HasColumnType("bytea");
 
                 entity.HasMany(u => u.Transactions)
                     .WithOne(t => t.Owner)

@@ -19,6 +19,9 @@ namespace WalletAppBackend.Configurations.Services
                            source => source.MapFrom(entity => entity.Type.Title));
 
             CreateMap<CreateTransactionApi, Transaction>();
+
+            CreateMap<User, UserApi>().ReverseMap();
+            CreateMap<User, CreateUserApi>().ReverseMap();
         }
     }
 }

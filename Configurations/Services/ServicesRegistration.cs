@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using WalletAppBackend.Models.Database;
 using WalletAppBackend.Services.Business;
 using WalletAppBackend.Services.Interfaces;
 using WalletAppBackend.Repositories.Business;
@@ -24,6 +26,20 @@ namespace WalletAppBackend.Configurations.Services
                 mc.AddProfile(new AutomapperProfile());
             });
             services.AddSingleton(mapperConfig.CreateMapper());
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterBusinessDatabase(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<AppDatabaseContext>(options =>
+            {
+                options.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
+                options.UseLazyLoadingProxies();
+            });
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            
+            services.AddScoped<IDatabaseSeeder, DatabaseDataSeeder>();
 
             return services;
         }

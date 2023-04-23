@@ -14,5 +14,14 @@ namespace WalletAppBackend.Services.Business
             byte[] hash = pbkdf2.GetBytes(hashLength);
             return Convert.ToBase64String(hash);
         }
+
+        public static byte[] GenerateSalt()
+        {
+            int saltLength = 32; // 256 bits
+            byte[] salt = new byte[saltLength];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(salt);
+            return salt;
+        }
     }
 }
