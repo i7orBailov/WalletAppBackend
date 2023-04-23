@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using WalletAppBackend.Models.Api;
-using WalletAppBackend.Models.Database;
+using WalletAppBackend.Models.Api.User;
+using WalletAppBackend.Models.Api.Transaction;
+using WalletAppBackend.Models.Database.Business;
 
 namespace WalletAppBackend.Configurations.Services
 {

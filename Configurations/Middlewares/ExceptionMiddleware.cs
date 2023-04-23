@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
-using WalletAppBackend.Models.Database;
 using WalletAppBackend.Models.Exceptions;
 using WalletAppBackend.Models.Api.Response;
 using WalletAppBackend.Repositories.Interfaces;
+using WalletAppBackend.Models.Database.Exception;
 
 namespace WalletAppBackend.Configurations.Middlewares
 {

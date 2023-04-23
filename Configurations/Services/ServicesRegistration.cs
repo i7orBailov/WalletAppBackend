@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using WalletAppBackend.Models.Database;
 using WalletAppBackend.Services.Business;
 using WalletAppBackend.Services.Interfaces;
 using WalletAppBackend.Repositories.Business;
 using WalletAppBackend.Repositories.Interfaces;
+using WalletAppBackend.Models.Database.Business;
+using WalletAppBackend.Models.Database.Exception;
 
 namespace WalletAppBackend.Configurations.Services
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace WalletAppBackend.Models.Database
+namespace WalletAppBackend.Models.Database.Business
 {
     // dotnet ef migrations add "" --context BusinessDbContext
     // dotnet ef database update --context BusinessDbContext
@@ -11,7 +11,7 @@ namespace WalletAppBackend.Models.Database
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionType> TransactionTypes { get; set; }
         public DbSet<TransactionStatus> TransactionStatuses { get; set; }
-        
+
         public BusinessDbContext(DbContextOptions<BusinessDbContext> options)
             : base(options) { }
 

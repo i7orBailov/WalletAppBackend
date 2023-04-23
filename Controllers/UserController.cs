@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WalletAppBackend.Models.Api;
+using WalletAppBackend.Models.Api.User;
 using WalletAppBackend.Models.Exceptions;
 using WalletAppBackend.Services.Interfaces;
 

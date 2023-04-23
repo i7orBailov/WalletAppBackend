@@ -1,4 +1,4 @@
-﻿namespace WalletAppBackend.Models.Database
+﻿namespace WalletAppBackend.Models.Database.Business
 {
     public class Transaction : IBusinessDbEntity
     {
@@ -16,7 +16,7 @@
 
         public int? AuthorizedUserId { get; set; }
         public virtual User? AuthorizedUser { get; set; }
-        
+
         public int? StatusId { get; set; }
         public virtual TransactionStatus? Status { get; set; }
 

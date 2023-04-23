@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WalletAppBackend.Models.Api;
 using WalletAppBackend.Models.Exceptions;
 using WalletAppBackend.Services.Interfaces;
+using WalletAppBackend.Models.Api.Transaction;
 
 namespace WalletAppBackend.Controllers
 {

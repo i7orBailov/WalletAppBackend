@@ -1,4 +1,4 @@
-﻿using WalletAppBackend.Models.Api;
+﻿using WalletAppBackend.Models.Api.User;
 using WalletAppBackend.Models.Api.Response;
 
 namespace WalletAppBackend.Services.Interfaces

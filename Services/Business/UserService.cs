@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using WalletAppBackend.Models.Api;
-using WalletAppBackend.Models.Database;
+using WalletAppBackend.Models.Api.User;
 using WalletAppBackend.Models.Exceptions;
 using WalletAppBackend.Models.Api.Response;
 using WalletAppBackend.Services.Interfaces;
 using WalletAppBackend.Repositories.Interfaces;
+using WalletAppBackend.Models.Database.Business;
 
 namespace WalletAppBackend.Services.Business
 {
@@ -66,6 +66,8 @@ namespace WalletAppBackend.Services.Business
         {
             int firstValue = _configuration.GetValue<int>("DailyPoints:FirstDayNewSeason");
             int secondValue = _configuration.GetValue<int>("DailyPoints:SecondDayNewSeason");
+            double thirdCondition = _configuration.GetValue<double>("DailyPoints:ThirdValueCondition");
+            double fourthCondition = _configuration.GetValue<double>("DailyPoints:FourthValueCondition");
             int dayNumber = _seasonService.GetDayNumberInSeason();
 
             if (dayNumber == 1)
@@ -83,7 +85,7 @@ namespace WalletAppBackend.Services.Business
                 int sum = firstValue + secondValue;
                 for (int i = 3; i <= dayNumber; i++)
                 {
-                    int next = (int)(0.6 * curr + prev);
+                    int next = (int)(thirdCondition * (fourthCondition * curr) + prev);
                     sum += next;
                     prev = curr;
                     curr = next;

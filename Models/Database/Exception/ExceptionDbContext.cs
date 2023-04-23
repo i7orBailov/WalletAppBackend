@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace WalletAppBackend.Models.Database
+namespace WalletAppBackend.Models.Database.Exception
 {
     // dotnet ef migrations add "" --context ExceptionDbContext
     // dotnet ef database update --context ExceptionDbContext
@@ -14,7 +14,7 @@ namespace WalletAppBackend.Models.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("Exception");
-            
+
             modelBuilder.Entity<ExceptionJournal>(entity =>
             {
                 entity.HasKey(ej => ej.EventId);

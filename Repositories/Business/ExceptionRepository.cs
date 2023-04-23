@@ -1,5 +1,5 @@
-﻿using WalletAppBackend.Models.Database;
-using WalletAppBackend.Repositories.Interfaces;
+﻿using WalletAppBackend.Repositories.Interfaces;
+using WalletAppBackend.Models.Database.Exception;
 
 namespace WalletAppBackend.Repositories.Business
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WalletAppBackend.Models.Database;
 using WalletAppBackend.Services.Interfaces;
+using WalletAppBackend.Models.Database.Business;
 
 namespace WalletAppBackend.Services.Business
 {

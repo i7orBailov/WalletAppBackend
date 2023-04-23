@@ -1,5 +1,5 @@
-﻿using WalletAppBackend.Models.Api;
-using WalletAppBackend.Models.Api.Response;
+﻿using WalletAppBackend.Models.Api.Response;
+using WalletAppBackend.Models.Api.Transaction;
 
 namespace WalletAppBackend.Services.Interfaces
 {

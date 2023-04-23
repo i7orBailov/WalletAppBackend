@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using WalletAppBackend.Models.Api;
-using WalletAppBackend.Models.Database;
 using WalletAppBackend.Models.Exceptions;
 using WalletAppBackend.Models.Api.Response;
 using WalletAppBackend.Services.Interfaces;
+using WalletAppBackend.Models.Api.Transaction;
 using WalletAppBackend.Repositories.Interfaces;
+using WalletAppBackend.Models.Database.Business;
 
 namespace WalletAppBackend.Services.Business
 {

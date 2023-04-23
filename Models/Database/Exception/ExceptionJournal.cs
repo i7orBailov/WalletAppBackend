@@ -1,4 +1,4 @@
-﻿namespace WalletAppBackend.Models.Database
+﻿namespace WalletAppBackend.Models.Database.Exception
 {
     public class ExceptionJournal : IExceptionDbEntity
     {

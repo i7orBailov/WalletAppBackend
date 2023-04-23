@@ -1,4 +1,4 @@
-﻿namespace WalletAppBackend.Models.Api
+﻿namespace WalletAppBackend.Models.Api.User
 {
     public class CreateUserApi
     {

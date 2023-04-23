@@ -1,4 +1,4 @@
-﻿namespace WalletAppBackend.Models.Database
+﻿namespace WalletAppBackend.Models.Database.Business
 {
     public class User : IBusinessDbEntity
     {
@@ -10,7 +10,7 @@
         public decimal Balance { get; set; }
         public decimal CardLimit { get; set; } = 1500;
         public string? PasswordHash { get; set; }
-        public byte[]? PasswordSalt { get; set;}
+        public byte[]? PasswordSalt { get; set; }
         public virtual ICollection<Transaction>? Transactions { get; set; }
     }
 }

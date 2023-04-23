@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using WalletAppBackend.Models.Database;
 using WalletAppBackend.Repositories.Interfaces;
+using WalletAppBackend.Models.Database.Business;
 
 namespace WalletAppBackend.Repositories.Business
 {

@@ -1,6 +1,6 @@
 ﻿using WalletAppBackend.Models.Enums;
 
-namespace WalletAppBackend.Models.Api
+namespace WalletAppBackend.Models.Api.Transaction
 {
     public class TransactionsDashboardApi
     {
