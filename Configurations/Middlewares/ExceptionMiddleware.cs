@@ -24,7 +24,7 @@ namespace WalletAppBackend.Configurations.Middlewares
             catch (Exception ex)
             {
                 string stackTrace = ex.ToString();
-                var repository = context.RequestServices.GetRequiredService<IBaseRepository<ExceptionJournal>>();
+                var repository = context.RequestServices.GetRequiredService<IExceptionRepository<ExceptionJournal>>();
                 var journalRecord = new ExceptionJournal
                 {
                     EventId = Guid.NewGuid().ToString(),
@@ -34,7 +34,7 @@ namespace WalletAppBackend.Configurations.Middlewares
                     StackTrace = stackTrace
                 };
 
-                await repository.AddAsync(journalRecord);
+                await repository.LogAsync(journalRecord);
 
                 Console.WriteLine($"Exception {journalRecord.EventId} occurred at {journalRecord.Timestamp}: {stackTrace}");
                 Console.WriteLine(journalRecord.StackTrace);

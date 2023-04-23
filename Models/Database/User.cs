@@ -1,6 +1,6 @@
 ﻿namespace WalletAppBackend.Models.Database
 {
-    public class User
+    public class User : IBusinessDbEntity
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }

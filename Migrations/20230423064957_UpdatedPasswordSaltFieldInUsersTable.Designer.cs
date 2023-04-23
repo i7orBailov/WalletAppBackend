@@ -11,7 +11,7 @@ using WalletAppBackend.Models.Database;
 
 namespace WalletAppBackend.Migrations
 {
-    [DbContext(typeof(AppDatabaseContext))]
+    [DbContext(typeof(BusinessDbContext))]
     [Migration("20230423064957_UpdatedPasswordSaltFieldInUsersTable")]
     partial class UpdatedPasswordSaltFieldInUsersTable
     {

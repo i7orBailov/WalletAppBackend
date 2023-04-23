@@ -14,7 +14,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });
-builder.Services.RegisterBusinessDatabase(builder.Configuration);
+builder.Services.RegisterDatabase(builder.Configuration);
 builder.Services.RegisterDependencyInjection();
 builder.Services.RegisterAutoMapper();
 builder.Services.RegisterSchedulers();
@@ -32,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseDatabaseDataSeeder();
+
+app.UseException();
 
 app.UseHttpsRedirection();
 

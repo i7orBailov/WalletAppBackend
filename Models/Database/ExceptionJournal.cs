@@ -1,6 +1,6 @@
 ﻿namespace WalletAppBackend.Models.Database
 {
-    public class ExceptionJournal
+    public class ExceptionJournal : IExceptionDbEntity
     {
         public string? EventId { get; set; }
         public DateTime Timestamp { get; set; }

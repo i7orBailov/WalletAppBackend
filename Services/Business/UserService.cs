@@ -10,13 +10,13 @@ namespace WalletAppBackend.Services.Business
 {
     public class UserService : IUserService
     {
-        private readonly IBaseRepository<User> _userRepository;
+        private readonly IBusinessRepository<User> _userRepository;
         private readonly IMapper _mapper;
         private readonly ISeasonService _seasonService;
         private readonly IConfiguration _configuration;
 
         public UserService(
-            IBaseRepository<User> userRepository, 
+            IBusinessRepository<User> userRepository, 
             IMapper mapper, 
             ISeasonService seasonService,
             IConfiguration configuration)

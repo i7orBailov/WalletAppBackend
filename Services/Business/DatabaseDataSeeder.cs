@@ -6,9 +6,9 @@ namespace WalletAppBackend.Services.Business
 {
     public class DatabaseDataSeeder : IDatabaseSeeder
     {
-        private readonly AppDatabaseContext _dbContext;
+        private readonly BusinessDbContext _dbContext;
 
-        public DatabaseDataSeeder(AppDatabaseContext dbContext)
+        public DatabaseDataSeeder(BusinessDbContext dbContext)
         {
             _dbContext = dbContext;
         }

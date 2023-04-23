@@ -11,7 +11,7 @@ using WalletAppBackend.Models.Database;
 
 namespace WalletAppBackend.Migrations
 {
-    [DbContext(typeof(AppDatabaseContext))]
+    [DbContext(typeof(BusinessDbContext))]
     [Migration("20230422113315_RemovedStatusTitleFieldDromTransactionsTable")]
     partial class RemovedStatusTitleFieldDromTransactionsTable
     {

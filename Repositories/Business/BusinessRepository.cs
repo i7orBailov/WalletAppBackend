@@ -5,11 +5,11 @@ using WalletAppBackend.Repositories.Interfaces;
 
 namespace WalletAppBackend.Repositories.Business
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BusinessRepository<T> : IBusinessRepository<T> where T : class, IBusinessDbEntity
     {
-        private readonly AppDatabaseContext _context;
+        private readonly BusinessDbContext _context;
 
-        public BaseRepository(AppDatabaseContext context)
+        public BusinessRepository(BusinessDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

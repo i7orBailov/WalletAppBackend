@@ -2,16 +2,17 @@
 
 namespace WalletAppBackend.Models.Database
 {
-    public class AppDatabaseContext : DbContext
+    // dotnet ef migrations add "" --context BusinessDbContext
+    // dotnet ef database update --context BusinessDbContext
+    public class BusinessDbContext : DbContext
     {
         public DbSet<Icon> Icons { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionType> TransactionTypes { get; set; }
         public DbSet<TransactionStatus> TransactionStatuses { get; set; }
-        public DbSet<ExceptionJournal> ExceptionsJournal { get; set; }
         
-        public AppDatabaseContext(DbContextOptions<AppDatabaseContext> options)
+        public BusinessDbContext(DbContextOptions<BusinessDbContext> options)
             : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -64,11 +65,8 @@ namespace WalletAppBackend.Models.Database
                 entity.Property(ts => ts.Title)
                     .IsRequired(false);
             });
-
-            modelBuilder.Entity<ExceptionJournal>(entity =>
-            {
-                entity.HasKey(ej => ej.EventId);
-            });
         }
     }
+
+    public interface IBusinessDbEntity { }
 }

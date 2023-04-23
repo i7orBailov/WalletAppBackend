@@ -6,5 +6,10 @@
         {
             return builder.UseMiddleware<DatabaseDataSeederMiddleware>();
         }
+
+        public static IApplicationBuilder UseException(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<ExceptionMiddleware>();
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace WalletAppBackend.Repositories.Interfaces
 {
-    public interface IBaseRepository<T>
+    public interface IBusinessRepository<T>
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> AddAsync(T entity);

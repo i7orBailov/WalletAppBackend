@@ -10,14 +10,14 @@ namespace WalletAppBackend.Services.Business
 {
     public class TransactionService : ITransactionService
     {
-        private readonly IBaseRepository<Transaction> _transactionRepository;
-        private readonly IBaseRepository<User> _userRepository;
+        private readonly IBusinessRepository<Transaction> _transactionRepository;
+        private readonly IBusinessRepository<User> _userRepository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
         public TransactionService(
-            IBaseRepository<Transaction> transactionRepository, 
-            IBaseRepository<User> userRepository,
+            IBusinessRepository<Transaction> transactionRepository, 
+            IBusinessRepository<User> userRepository,
             IMapper mapper,
             IConfiguration configuration)
         {

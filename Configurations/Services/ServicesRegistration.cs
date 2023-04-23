@@ -15,7 +15,8 @@ namespace WalletAppBackend.Configurations.Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITransactionService, TransactionService>();
             services.AddScoped<ISeasonService, SeasonService>();
-            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IBusinessRepository<>), typeof(BusinessRepository<>));
+            services.AddScoped(typeof(IExceptionRepository<>), typeof(ExceptionRepository<>));
 
             return services;
         }
@@ -31,13 +32,21 @@ namespace WalletAppBackend.Configurations.Services
             return services;
         }
 
-        public static IServiceCollection RegisterBusinessDatabase(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDatabaseContext>(options =>
+            services.AddDbContext<BusinessDbContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
+                options.UseNpgsql(configuration.GetConnectionString("BusinessDb"));
                 options.UseLazyLoadingProxies();
             });
+
+            services.AddDbContext<ExceptionDbContext>(options =>
+            {
+                options.UseNpgsql(configuration.GetConnectionString("ExceptionDb"),
+                    sqlOptions => sqlOptions.MigrationsHistoryTable(tableName: "__ExceptionMigrationsHistory", schema: "Exception")
+                                            .MigrationsAssembly(typeof(ExceptionDbContext).Assembly.FullName));
+            });
+
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             services.AddScoped<IDatabaseSeeder, DatabaseDataSeeder>();

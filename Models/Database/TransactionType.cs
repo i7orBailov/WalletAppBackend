@@ -1,6 +1,6 @@
 ﻿namespace WalletAppBackend.Models.Database
 {
-    public class TransactionType
+    public class TransactionType : IBusinessDbEntity
     {
         public string? Title { get; set; }
     }
